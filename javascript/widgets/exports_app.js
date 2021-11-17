@@ -92,3 +92,7 @@ goog.exportProperty(
     goog.Promise.prototype, 'catch', goog.Promise.prototype.thenCatch);
 goog.exportProperty(
     goog.Promise.prototype, 'finally', goog.Promise.prototype.thenAlways);
+
+
+goog.exportSymbol('firebaseui.auth.AuthUI.getEmailForSignIn', firebaseui.auth.storage.getEmailForSignIn);
+goog.exportSymbol('firebaseui.auth.AuthUI.removeEmailForSignIn', firebaseui.auth.storage.removeEmailForSignIn);
