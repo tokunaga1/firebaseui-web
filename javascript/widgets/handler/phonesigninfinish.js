@@ -159,7 +159,7 @@ firebaseui.auth.widget.handler.onPhoneSignInFinishSubmit_ = function(
                 'credential': null,
                 'operationType': userCredential['operationType'],
                 'additionalUserInfo': userCredential['additionalUserInfo'],
-                'verificationId': phoneAuthResult['verificationId'],
+                'verificationId': phoneAuthResult.verificationId,
                 'verificationCode': verificationCode
               }));
           firebaseui.auth.widget.handler.common.setLoggedInWithAuthResult(
