@@ -834,6 +834,14 @@ class Config {
   }
 
   /**
+   * @return {?Config.inspectVerificationIdCallback} The callback to invoke when the user gets verificationId in phoneAuthResult.
+   */
+  getVerificationIdCallback() {
+    return /** @type {?Config.inspectVerificationIdCallback} */ (
+        this.getCallbacks_()['inspectVerificationId'] || null);
+  }
+
+  /**
    * @return {!Object} The callback configuration.
    * @private
    */
@@ -946,6 +954,12 @@ Config.signInSuccessWithAuthResultCallback;
  * @typedef {function(!AuthUIError): (!Promise<void>|void)}
  */
 Config.signInFailureCallback;
+
+/**
+ * The configuration phoneAuthResult callback.
+ * @typedef {function(string=, string=): !Promise<void>}
+ */
+Config.inspectVerificationIdCallback;
 
 /**
  * The type of sign-in flow.

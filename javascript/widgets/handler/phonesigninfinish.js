@@ -131,14 +131,25 @@ firebaseui.auth.widget.handler.onPhoneSignInFinishSubmit_ = function(
     return;
   }
 
+  // get verificationId
+  const inspectVerificationIdCallback = app.getConfig().getVerificationIdCallback()
+  let callback_fn, callback_args;
+
+  if (inspectVerificationIdCallback) {
+    callback_fn = (inspectVerificationIdCallback)
+    callback_args = [phoneAuthResult.verificationId, verificationCode]
+  } else {
+    callback_fn = (goog.bind(phoneAuthResult.confirm, phoneAuthResult))
+    callback_args = [verificationCode]
+  }
+
   // Display the progress dialog while the code is being sent.
   component.showProgressDialog(
       firebaseui.auth.ui.element.progressDialog.State.LOADING,
       firebaseui.auth.soy2.strings.dialogVerifyingPhoneNumber().toString());
   app.registerPending(component.executePromiseRequest(
-      /** @type {function (): !goog.Promise} */ (
-          goog.bind(phoneAuthResult.confirm, phoneAuthResult)),
-      [verificationCode],
+      callback_fn,
+      callback_args,
       // On success a user credential is returned.
       function(userCredential) {
         component.dismissDialog();
