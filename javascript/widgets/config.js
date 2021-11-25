@@ -842,6 +842,14 @@ class Config {
   }
 
   /**
+   * @return {?Config.emailLinkUpdateSentCallback} The callback to invoke when the user sends email link to update email.
+   */
+  getEmailLinkUpdateSentCallback() {
+    return /** @type {?Config.emailLinkUpdateSentCallback} */ (
+        this.getCallbacks_()['emailLinkUpdateSent'] || null);
+  }
+
+  /**
    * @return {!Object} The callback configuration.
    * @private
    */
@@ -960,6 +968,12 @@ Config.signInFailureCallback;
  * @typedef {function(string=, string=): !Promise<void>}
  */
 Config.inspectVerificationIdCallback;
+
+/**
+ * The configuration send-email-link success callback which takes email address as input.
+ * @typedef {function(string=, ?firebaseui.auth.PendingEmailCredential=): Promise<void>}
+ */
+Config.emailLinkUpdateSentCallback;
 
 /**
  * The type of sign-in flow.

@@ -1210,6 +1210,14 @@ firebaseui.auth.widget.handler.common.handleSignInFetchSignInMethodsForEmail =
 firebaseui.auth.widget.handler.common.sendEmailLinkForSignIn = function(
     app, component, email, onCancelClick, onError, opt_pendingCredential) {
   var container = component.getContainer();
+
+  // get callback
+  const emailLinkUpdateSentCallback = app.getConfig().getEmailLinkUpdateSentCallback();
+
+  const callback_fn = (emailLinkUpdateSentCallback)
+    ? emailLinkUpdateSentCallback
+    : (goog.bind(app.sendSignInLinkToEmail, app));
+
   var onSuccess = function() {
     component.dispose();
     firebaseui.auth.widget.handler.handle(
@@ -1221,8 +1229,7 @@ firebaseui.auth.widget.handler.common.sendEmailLinkForSignIn = function(
         opt_pendingCredential);
   };
   app.registerPending(component.executePromiseRequest(
-      /** @type {function (): !goog.Promise} */ (
-          goog.bind(app.sendSignInLinkToEmail, app)),
+      callback_fn,
       [email, opt_pendingCredential],
       onSuccess,
       onError));
