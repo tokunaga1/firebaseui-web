@@ -21,6 +21,7 @@
     "build": "gulp",
     "build-all": "gulp build-all",
     "build-soy": "gulp build-soy",
+    "build-ja": "npm run build build-npm-ja",
     "demo": "npm run build && sh ./buildtools/run_demo.sh",
     "test": "npm run build && npm run generate-test-files && sh ./buildtools/run_tests.sh",
     "serve": "npm run build && npm run generate-test-files && gulp serve",
